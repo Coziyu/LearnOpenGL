@@ -1,0 +1,2 @@
+E:\PROGRA~1\MINGW-~1\WINLIB~1.0-R\mingw64\bin\ar.exe qc libshader.a CMakeFiles/shader.dir/src/funcs/shader.cpp.obj
+E:\PROGRA~1\MINGW-~1\WINLIB~1.0-R\mingw64\bin\ranlib.exe libshader.a

@@ -1,0 +1,32 @@
+[
+{
+  "directory": "D:/Code/Projects/LearnOpenGL/build",
+  "command": "E:\\PROGRA~1\\MINGW-~1\\WINLIB~1.0-R\\mingw64\\bin\\gcc.exe  @CMakeFiles/glad.dir/includes_C.rsp -g -o CMakeFiles\\glad.dir\\src\\glad.c.obj -c D:\\Code\\Projects\\LearnOpenGL\\src\\glad.c",
+  "file": "D:/Code/Projects/LearnOpenGL/src/glad.c"
+},
+{
+  "directory": "D:/Code/Projects/LearnOpenGL/build",
+  "command": "E:\\PROGRA~1\\MINGW-~1\\WINLIB~1.0-R\\mingw64\\bin\\G__~1.EXE  @CMakeFiles/shader.dir/includes_CXX.rsp -g -o CMakeFiles\\shader.dir\\src\\funcs\\shader.cpp.obj -c D:\\Code\\Projects\\LearnOpenGL\\src\\funcs\\shader.cpp",
+  "file": "D:/Code/Projects/LearnOpenGL/src/funcs/shader.cpp"
+},
+{
+  "directory": "D:/Code/Projects/LearnOpenGL/build",
+  "command": "E:\\PROGRA~1\\MINGW-~1\\WINLIB~1.0-R\\mingw64\\bin\\G__~1.EXE  @CMakeFiles/rendering.dir/includes_CXX.rsp -g -o CMakeFiles\\rendering.dir\\src\\main.cpp.obj -c D:\\Code\\Projects\\LearnOpenGL\\src\\main.cpp",
+  "file": "D:/Code/Projects/LearnOpenGL/src/main.cpp"
+},
+{
+  "directory": "D:/Code/Projects/LearnOpenGL/build",
+  "command": "E:\\PROGRA~1\\MINGW-~1\\WINLIB~1.0-R\\mingw64\\bin\\G__~1.EXE  @CMakeFiles/rendering.dir/includes_CXX.rsp -g -o CMakeFiles\\rendering.dir\\src\\funcs\\func.cpp.obj -c D:\\Code\\Projects\\LearnOpenGL\\src\\funcs\\func.cpp",
+  "file": "D:/Code/Projects/LearnOpenGL/src/funcs/func.cpp"
+},
+{
+  "directory": "D:/Code/Projects/LearnOpenGL/build",
+  "command": "E:\\PROGRA~1\\MINGW-~1\\WINLIB~1.0-R\\mingw64\\bin\\G__~1.EXE  @CMakeFiles/rendering.dir/includes_CXX.rsp -g -o CMakeFiles\\rendering.dir\\src\\funcs\\data.cpp.obj -c D:\\Code\\Projects\\LearnOpenGL\\src\\funcs\\data.cpp",
+  "file": "D:/Code/Projects/LearnOpenGL/src/funcs/data.cpp"
+},
+{
+  "directory": "D:/Code/Projects/LearnOpenGL/build",
+  "command": "E:\\PROGRA~1\\MINGW-~1\\WINLIB~1.0-R\\mingw64\\bin\\G__~1.EXE  @CMakeFiles/rendering.dir/includes_CXX.rsp -g -o CMakeFiles\\rendering.dir\\src\\funcs\\shader.cpp.obj -c D:\\Code\\Projects\\LearnOpenGL\\src\\funcs\\shader.cpp",
+  "file": "D:/Code/Projects/LearnOpenGL/src/funcs/shader.cpp"
+}
+]
