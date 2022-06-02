@@ -1,4 +1,5 @@
 #Backup old CMakeList.txt file for reference
 CMakeLists copy.txt
+CMakeLists_stop.txt
 build/.cmake/**
 build/CMakeFiles/**
