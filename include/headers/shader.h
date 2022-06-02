@@ -5,7 +5,6 @@
 #include <fstream>
 #include <sstream>
 #include <iostream>
-  
 
 class Shader
 {

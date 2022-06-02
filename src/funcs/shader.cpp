@@ -1,8 +1,8 @@
-#include <iostream>
+#include <glad/glad.h> // include glad to get all the required OpenGL headers
 #include <string>
 #include <fstream>
 #include <sstream>
-#include <glad/glad.h>
+#include <iostream>
 class Shader
 {
 public:
@@ -62,7 +62,7 @@ public:
         }
 
         //Compiling fragment shaders
-        fragmentShader = glCreateShader(GL_VERTEX_SHADER);
+        fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
         glShaderSource(fragmentShader, 1, &fragmentShaderCode, NULL);
         glCompileShader(fragmentShader);
 

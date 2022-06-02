@@ -164,7 +164,7 @@ CMakeFiles/rendering.dir/src/main.cpp.obj: \
  D:/Code/Projects/LearnOpenGL/include/GLFW\glfw3.h \
  D:/Code/Projects/LearnOpenGL/include/headers/func.h \
  D:/Code/Projects/LearnOpenGL/include/headers/data.h \
- D:/Code/Projects/LearnOpenGL/include/headers/shader.h \
+ d:\code\projects\learnopengl\src\funcs\shader.cpp \
  D:/Code/Projects/LearnOpenGL/include/glad/glad.h \
  e:\progra~1\mingw-~1\winlib~1.0-r\mingw64\include\c++\12.1.0\sstream \
  e:\progra~1\mingw-~1\winlib~1.0-r\mingw64\include\c++\12.1.0\bits\sstream.tcc
