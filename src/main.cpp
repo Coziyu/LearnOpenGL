@@ -6,8 +6,8 @@
 #include <GLFW\glfw3.h>
 #include "headers/func.h"
 #include "headers/data.h"
-//#include "headers/shader.h"
-#include "../src/funcs/shader.cpp"
+#include "headers/shader.h"
+
 unsigned const int WIN_WIDTH = 800;
 unsigned const int WIN_HEIGHT = 600; 
 
