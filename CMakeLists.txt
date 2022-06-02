@@ -42,7 +42,7 @@ add_library(shader src/funcs/shader.cpp ${HEADER_FILES}) #DO THIS TO INCLUDE ALL
 add_executable(rendering "${SOURCE}")
 #target_include_directories(rendering PUBLIC "${CMAKE_SOURCE_DIR}\\include") #UNSURE WHETHER NEEDED
 target_link_libraries(rendering "${LIBRARY}")
-
+set_target_properties(rendering PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/bin)
 # set(CPACK_PROJECT_NAME ${PROJECT_NAME})
 # set(CPACK_PROJECT_VERSION ${PROJECT_VERSION})
 # include(CPack)
