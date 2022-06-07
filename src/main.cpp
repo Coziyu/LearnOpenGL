@@ -9,6 +9,9 @@
 #include "headers/shader.h"
 #define STB_IMAGE_IMPLEMENTATION
 #include "stb/stb_image.h"
+#include "glm/glm.hpp"
+#include "glm/gtc/matrix_transform.hpp"
+#include "glm/gtc/type_ptr.hpp"
 
 unsigned const int WIN_WIDTH = 800;
 unsigned const int WIN_HEIGHT = 600; 
