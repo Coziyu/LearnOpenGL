@@ -13,6 +13,13 @@
 #include "glm/gtc/matrix_transform.hpp"
 #include "glm/gtc/type_ptr.hpp"
 
+
+//TODO: IMPLEMENT CLASSES FOR VAO, VBO, EBO CREATION AND USE
+//TODO: IMPLEMENT CLASSES FOR TEXTURE LOADING AND USE
+//TODO: ADD METHODS TO SHADER CLASS TO ADD glm::matrix TO SET UNIFORMS
+
+
+
 unsigned const int WIN_WIDTH = 800;
 unsigned const int WIN_HEIGHT = 600; 
 
@@ -130,8 +137,11 @@ int main(){
     //can assign texture to uniform through shaderclass too
     myShader.setInt("texture1", 0);  //0 here points to the GL_TEXTURE0 texture unit
     glUniform1i(glGetUniformLocation(myShader.ID, "texture2"), 1);
-    while(!glfwWindowShouldClose(window)){
 
+    glm::mat4 transform(1.0f); //Identity matrix
+    while(!glfwWindowShouldClose(window)){
+        float time = glfwGetTime();
+        
         // inputA
         processInput(window);
         
@@ -152,11 +162,26 @@ int main(){
         glBindBuffer(GL_ARRAY_BUFFER,VBO_Colour);
         glBufferData(GL_ARRAY_BUFFER, sizeof(colours), colours, GL_DYNAMIC_DRAW);
 
-
         myShader.setFloat("blend", blend);
-
         glBindVertexArray(VAO); //Only because we unbinded VAO;
+
+        glm::mat4 transform(1.0f); //Identity matrix
+        transform = glm::rotate(transform, (float)glfwGetTime(), glm::vec3(0.0f, 0.0f, 1.0f));
+        transform = glm::translate(transform, glm::vec3(0.5f,0.5f, 0.0f));
+        glUniformMatrix4fv(glGetUniformLocation(myShader.ID, "transform"), 1, GL_FALSE, glm::value_ptr(transform));
+
         glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, (void*)0);
+
+
+        transform = glm::mat4(1.0f); //Identity matrix
+        transform = glm::scale(transform, glm::vec3(sin(time), cos(time), 1.0f));
+        transform = glm::translate(transform, glm::vec3(-0.5f,-0.5f, 0.0f));
+        glUniformMatrix4fv(glGetUniformLocation(myShader.ID, "transform"), 1, GL_FALSE, glm::value_ptr(transform));
+
+        glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, (void*)0);
+
+
+
         //check and call events and swap buffers
 
         glBindVertexArray(0);

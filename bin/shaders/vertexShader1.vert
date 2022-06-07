@@ -6,8 +6,10 @@ layout (location = 2) in vec2 vecTexCoord;
 out vec3 interpolated_ourColour;
 out vec2 texCoord;
 
+uniform mat4 transform;
+
 void main(){
     interpolated_ourColour = vecCol;
     texCoord = vec2(vecTexCoord.x,vecTexCoord.y);
-    gl_Position = vec4(vecPos, 1.0);
+    gl_Position = transform * vec4(vecPos, 1.0);
 }
