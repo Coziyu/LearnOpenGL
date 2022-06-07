@@ -10,10 +10,11 @@ void processInput(GLFWwindow *window){
         glfwSetWindowShouldClose(window, true);
     }
     if (glfwGetKey(window, GLFW_KEY_CAPS_LOCK) == GLFW_PRESS){
-        float def_vertices[9] = {
-            0.0f, 0.5f, 0.0f,
-            0.5f, -0.5f, 0.0f,
-            -0.5f, -0.5f, 0.0f
+        float def_vertices[12] = {
+            0.5f,  0.5f,  0.0f,
+            0.5f, -0.5f,  0.0f,
+            -0.5f, -0.5f,  0.0f,
+            -0.5f,  0.5f,  0.0f
         };
         for(int i = 0; i < 9; ++i){
             vertices[i] = def_vertices[i];
@@ -38,5 +39,11 @@ void processInput(GLFWwindow *window){
         vertices[0] -= 0.01;
         vertices[3] -= 0.01;
         vertices[6] -= 0.01;
+    }
+    if(glfwGetKey(window, GLFW_KEY_UP) == GLFW_PRESS){
+        blend += 0.05; 
+    }
+    if(glfwGetKey(window, GLFW_KEY_DOWN) == GLFW_PRESS){
+        blend -= 0.05; 
     }
 }

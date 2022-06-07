@@ -1,10 +1,13 @@
 #version 330 core
 layout (location = 0) in vec3 vecPos;
 layout (location = 1) in vec3 vecCol;
+layout (location = 2) in vec2 vecTexCoord;
 
 out vec3 interpolated_ourColour;
+out vec2 texCoord;
 
 void main(){
     interpolated_ourColour = vecCol;
-    gl_Position = vec4(vecPos.x, vecPos.y, vecPos.z, 1.0);
+    texCoord = vec2(vecTexCoord.x,vecTexCoord.y);
+    gl_Position = vec4(vecPos, 1.0);
 }
