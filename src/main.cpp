@@ -16,9 +16,7 @@
 
 //TODO: IMPLEMENT CLASSES FOR VAO, VBO, EBO CREATION AND USE
 //TODO: IMPLEMENT CLASSES FOR TEXTURE LOADING AND USE
-//TODO: ADD METHODS TO SHADER CLASS TO ADD glm::matrix TO SET UNIFORMS
-
-
+//TODO: Overload Shader::setMat() with other mat types when needed
 
 unsigned const int WIN_WIDTH = 800;
 unsigned const int WIN_HEIGHT = 600; 
@@ -138,7 +136,6 @@ int main(){
     myShader.setInt("texture1", 0);  //0 here points to the GL_TEXTURE0 texture unit
     glUniform1i(glGetUniformLocation(myShader.ID, "texture2"), 1);
 
-    glm::mat4 transform(1.0f); //Identity matrix
     while(!glfwWindowShouldClose(window)){
         float time = glfwGetTime();
         

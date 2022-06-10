@@ -10,7 +10,7 @@ void processInput(GLFWwindow *window){
         glfwSetWindowShouldClose(window, true);
     }
     if (glfwGetKey(window, GLFW_KEY_CAPS_LOCK) == GLFW_PRESS){
-        float def_vertices[12] = {
+        const float def_vertices[12] = {
             0.5f,  0.5f,  0.0f,
             0.5f, -0.5f,  0.0f,
             -0.5f, -0.5f,  0.0f,
