@@ -2,6 +2,7 @@
 #include <fstream>
 #include <streambuf>
 #include <cmath>
+#include <vector>
 #include <glad\glad.h>
 #include <GLFW\glfw3.h>
 #include "headers/func.h"
@@ -14,7 +15,7 @@
 #include "glm/gtc/type_ptr.hpp"
 
 
-//TODO: IMPLEMENT CLASSES FOR VAO, VBO, EBO CREATION AND USE
+//TODO: IMPLEMENT CLASSES FOR DRAWING SPECIFIC ITEMS USING VAO, VBO, EBO
 //TODO: IMPLEMENT CLASSES FOR TEXTURE LOADING AND USE
 //TODO: Overload Shader::setMat() with other mat types when needed
 
@@ -47,7 +48,12 @@ int main(){
     unsigned int VAO; //Tells opengl what data in VBO is and how it is formatted. 
     unsigned int VBO_Vertex,VBO_Colour,VBO_TexCoords; //Stores vertices/vertex data to be passed into GPU for processing.
     unsigned int EBO;
-    
+
+    unsigned int VAOL[50];
+    unsigned int* p_VAOL = &VAOL[0];
+    glGenVertexArrays(17, &VAOL[0]);
+    std::cout << p_VAOL << std::endl;
+
     glGenVertexArrays(1,&VAO);
     glGenBuffers(1, &VBO_Vertex);
     glGenBuffers(1, &VBO_Colour);

@@ -17,7 +17,6 @@ set(HEADER_FILES
 include/headers/data.h
 include/headers/func.h
 include/headers/shader.h
-include/headers/buffer.h
 include/glad/glad.h
 include/glm/glm.hpp
 include/glm/gtc/matrix_transform.hpp
