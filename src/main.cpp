@@ -88,18 +88,31 @@ int main(){
     Texture2D tex2("textures/awesomeface.png", GL_RGBA);
 
     //tell opengl which texture is assigned to each sampler in shader code. (only needs to be done once)
+    //unless shader program is reloaded. then bindings needs to be redone
     myShader.use();
     //glUniform1i(glGetUniformLocation(myShader.ID, "texture1"), 0);
     //can assign texture to uniform through shaderclass too
     myShader.setInt("texture1", 0);  //0 here points to the GL_TEXTURE0 texture unit
     glUniform1i(glGetUniformLocation(myShader.ID, "texture2"), 1);
 
+    bool button_r_pressed = false;
+
     while(!glfwWindowShouldClose(window)){
         float time = glfwGetTime();
         
         // inputA
         processInput(window);
-        
+        if((glfwGetKey(window, GLFW_KEY_R) == GLFW_PRESS) && !button_r_pressed){
+            reloadShader(window, &myShader);
+            myShader.use();
+            myShader.setInt("texture1", 0);
+            glUniform1i(glGetUniformLocation(myShader.ID, "texture2"), 1);
+            button_r_pressed = true;
+        }
+        if(glfwGetKey(window,GLFW_KEY_R) == GLFW_RELEASE){
+            button_r_pressed = false;
+        }
+
         //rendering commands
         glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);

@@ -103,3 +103,94 @@ void Shader::setFloat(const std::string &name, float value) const{
 void Shader::setMat(const std::string &name, glm::mat4 value) const{ 
     glUniformMatrix4fv(glGetUniformLocation(ID, name.c_str()), 1, GL_FALSE, glm::value_ptr(value)); 
 } 
+
+void Shader::reload(const char* vertexPath, const char* fragmentPath){
+    std::string vertexShaderSource,fragmentShaderSource;
+    std::ifstream vertexShaderFile,fragmentShaderFile;
+    bool error_present = false;
+    //ensure ifstream objects can throw exceptions:
+    vertexShaderFile.exceptions(std::ifstream::failbit | std::ifstream::badbit);
+    fragmentShaderFile.exceptions(std::ifstream::failbit | std::ifstream::badbit);
+    try
+    {
+        //Open files
+        vertexShaderFile.open(vertexPath);
+        fragmentShaderFile.open(fragmentPath);
+        std::stringstream vertexShaderStream,fragmentShaderStream;
+
+        //Read file buffer contents into streams
+        vertexShaderStream << vertexShaderFile.rdbuf();
+        vertexShaderFile.close();
+        fragmentShaderStream << fragmentShaderFile.rdbuf();
+        fragmentShaderFile.close();
+
+        //Conver SS into string
+        vertexShaderSource = vertexShaderStream.str();
+        fragmentShaderSource = fragmentShaderStream.str();
+    }
+    catch(const std::exception& e)
+    {
+        std::cout << "ERROR::SHADER::FILE_NOT_SUCCESFULLY_READ" << std::endl;
+        std::cout << "NEW SHADERS WILL NOT BE LOADED" << std::endl;
+        error_present = true;
+    }
+    const char* vertexShaderCode = vertexShaderSource.c_str();
+    const char* fragmentShaderCode = fragmentShaderSource.c_str();
+
+    //* 2)Compiling the shaders
+    unsigned int vertexShader,fragmentShader;
+    int vec_success,frag_success,link_success;
+    char infoLog[512];
+
+    //Compiling vertex shaders
+    vertexShader = glCreateShader(GL_VERTEX_SHADER);
+    glShaderSource(vertexShader, 1, &vertexShaderCode, NULL);
+    glCompileShader(vertexShader);
+
+    glGetShaderiv(vertexShader, GL_COMPILE_STATUS, &vec_success);
+    if(!vec_success){
+        glGetShaderInfoLog(vertexShader,512,NULL,infoLog);
+        std::cout << "ERROR::SHADER::VERTEX::COMPILATION_FAILED\n" << infoLog << std::endl;
+        std::cout << "NEW SHADERS WILL NOT BE LOADED" << std::endl;
+        error_present = true;
+    }
+
+    //Compiling fragment shaders
+    fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
+    glShaderSource(fragmentShader, 1, &fragmentShaderCode, NULL);
+    glCompileShader(fragmentShader);
+
+    glGetShaderiv(fragmentShader, GL_COMPILE_STATUS, &frag_success);
+    if(!frag_success){
+        glGetShaderInfoLog(fragmentShader, 512, NULL, infoLog);
+        std::cout << "ERROR::SHADER::FRAGMENT::COMPILATION_FAILED\n" << infoLog << std::endl;
+        std::cout << "NEW SHADERS WILL NOT BE LOADED" << std::endl;
+        error_present = true;
+
+    }
+
+    //Creating shader program
+    unsigned int reloadedID = glCreateProgram();
+    glAttachShader(reloadedID,vertexShader);
+    glAttachShader(reloadedID,fragmentShader);
+    glLinkProgram(reloadedID);
+
+    glGetProgramiv(reloadedID, GL_LINK_STATUS, &link_success);
+    if(!link_success){
+        glGetProgramInfoLog(reloadedID, 512, NULL, infoLog);
+        std::cout << "ERROR::SHADER::PROGRAM::LINKING_FAILED\n" << infoLog << std::endl;
+        std::cout << "NEW SHADERS WILL NOT BE LOADED" << std::endl;
+        error_present = true;
+    }
+    glDeleteShader(vertexShader);
+    glDeleteShader(fragmentShader);
+
+    if(!error_present){
+        glDeleteProgram(ID);
+        ID = reloadedID;
+        std::cout << "SHADER SUCCESSFULLY RELOADED" << std::endl;
+    }
+    else{
+        glDeleteProgram(reloadedID);
+    }
+}
