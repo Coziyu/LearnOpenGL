@@ -8,6 +8,7 @@
 #include "headers/func.h"
 #include "headers/data.h"
 #include "headers/shader.h"
+#include "headers/texture.h"
 #define STB_IMAGE_IMPLEMENTATION
 #include "stb/stb_image.h"
 #include "glm/glm.hpp"
@@ -48,12 +49,7 @@ int main(){
     unsigned int VAO; //Tells opengl what data in VBO is and how it is formatted. 
     unsigned int VBO_Vertex,VBO_Colour,VBO_TexCoords; //Stores vertices/vertex data to be passed into GPU for processing.
     unsigned int EBO;
-
-    unsigned int VAOL[50];
-    unsigned int* p_VAOL = &VAOL[0];
-    glGenVertexArrays(17, &VAOL[0]);
-    std::cout << p_VAOL << std::endl;
-
+    
     glGenVertexArrays(1,&VAO);
     glGenBuffers(1, &VBO_Vertex);
     glGenBuffers(1, &VBO_Colour);
@@ -88,52 +84,8 @@ int main(){
 
     //Generate textures
 
-    
-    unsigned int texture1;
-    glGenTextures(1, &texture1);
-    glBindTexture(GL_TEXTURE_2D, texture1);
-
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-
-    
-    int tex_width, tex_height, tex_nrChannels;
-    //STBI reads image from up to down, while opengl reads image from down to up
-    stbi_set_flip_vertically_on_load(true);
-    unsigned char *data = stbi_load("textures/container.jpg", &tex_width, &tex_height, &tex_nrChannels, 0);
-    
-    if(data){
-        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, tex_width, tex_height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
-        glGenerateMipmap(GL_TEXTURE_2D);
-    }
-    else{
-        std::cout << "Failed to load texture" << std::endl;
-    }
-    stbi_image_free(data);
-
-    unsigned int texture2;
-    glGenTextures(1, &texture2);
-    glBindTexture(GL_TEXTURE_2D, texture2);
-
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_MIRRORED_REPEAT);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-
-    //stbi_set_flip_vertically_on_load(true);
-    data = stbi_load("textures/awesomeface.png", &tex_width, &tex_height, &tex_nrChannels, 0);
-
-    if(data){
-        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, tex_width, tex_height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
-        glGenerateMipmap(GL_TEXTURE_2D);
-    }
-    else{
-        std::cout << "Failed to load texture" << std::endl;
-    }
-    stbi_image_free(data);
-
+    Texture2D tex1("textures/container.jpg", GL_RGB);
+    Texture2D tex2("textures/awesomeface.png", GL_RGBA);
 
     //tell opengl which texture is assigned to each sampler in shader code. (only needs to be done once)
     myShader.use();
@@ -154,9 +106,9 @@ int main(){
         
         
         glActiveTexture(GL_TEXTURE0); //Using texture units 
-        glBindTexture(GL_TEXTURE_2D, texture1);
+        glBindTexture(GL_TEXTURE_2D, tex1.ID);
         glActiveTexture(GL_TEXTURE1);
-        glBindTexture(GL_TEXTURE_2D, texture2);
+        glBindTexture(GL_TEXTURE_2D, tex2.ID);
         
         myShader.use();
         glBindBuffer(GL_ARRAY_BUFFER,VBO_Vertex); // Binded to update vertex pos
