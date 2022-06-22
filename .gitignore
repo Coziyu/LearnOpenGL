@@ -7,3 +7,5 @@ bin/rendering.exe
 build/compile_commands.json
 build/**
 build/
+.vscode/**
+vscode/
